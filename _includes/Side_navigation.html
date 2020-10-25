@@ -1,5 +1,6 @@
 
      <!-- Vertical navbar -->
+    {%- if page_paths -%}
 	<div class="vertical-nav bg-dark" id="sidebar">
   		<div class="py-4 px-3 mb-4 bg-dark">
       		<div class="media-body">
@@ -16,39 +17,24 @@
                 	<i class="text-Inverse fa-fw"></i>主页</a>
     		</li>
 
-    	<li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed nav-link text-light bg-dark"><i class="mr-3 text-primary fa-fw"></i> 分类</a>
-                    <ul class="list-unstyled collapse" id="pageSubmenu" style="">
-                    <li>
-                    <a href="javascript:void(0);" class="categories-item" cate="All">
-                        All&nbsp;<span class="categories-badge"> {{site.posts | size}}</span>
-                    </a>
-                   </li>
-                {% for category in site.categories %}
-                <li>
-                    <a href="{{ root_url }}/{{ site.category_dir }}#{{ category | first }}" class="categories-item" cate="{{ category | first }}">
-                        {{ category | first }}&nbsp;<span class="categories-badge">{{ category | last | size }}</span>
-                    </a>
-                </li>
-                {% endfor %}
-                    </ul>
-                </li>
+			<div class="trigger">
+            {%- for path in page_paths -%}
+              {%- assign my_page = site.pages | where: "path", path | first -%}
+              {%- if my_page.title -%}
+              <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | upcase | escape }}</a>
+              {%- endif -%}
+            {%- endfor -%}
 
-    		 {% for item in site.nav %}
-                  <li class="nav-item"><a class="nav-link bg-dark text-light" href="{{item.url}}"  title="{{item.description}}">{{item.title}}</a></li>
-                  {% endfor %}     
-  		</ul>
-
-  		<p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
-
-  			<ul class="nav flex-column bg-dark mb-0">
-    			<li class="nav-item ">
-      				<a href="#" class="nav-link text-light font-italic">
-                	<i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
-                		Area charts
-            		</a>
-    			</li>
-    			
+            {%- assign name = 'translate_langs' -%}
+            {%- include functions.html func='get_value' -%}
+            {%- assign translate_langs = return -%}
+            {%- if translate_langs.size > 0 -%}
+              <span class="page-link">
+                  {%- include extensions/google-translate.html -%}
+              </span>
+            {%- endif -%}
+          </div>
+    
   			</ul>
 	</div>
 <!-- End vertical navbar -->
