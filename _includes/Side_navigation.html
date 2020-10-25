@@ -1,0 +1,55 @@
+
+     <!-- Vertical navbar -->
+	<div class="vertical-nav bg-dark" id="sidebar">
+  		<div class="py-4 px-3 mb-4 bg-dark">
+      		<div class="media-body">
+        		<h4 class="font-weight-white text-muted mb-0">Verical Navbar</h4>
+        		<p class="font-weight-grey text-muted mb-0">With HTML and Bootstrap</p>
+      		</div>
+  		</div>
+
+  		<p class="text-white font-weight-bold text-uppercase px-3 small pb-4 mb-0">Main</p>
+
+  		<ul class="nav flex-column bg-Inverse mb-0">
+    		<li class="nav-item active">
+      			<a href="/" class="nav-link text-light bg-dark">
+                	<i class="text-Inverse fa-fw"></i>主页</a>
+    		</li>
+
+    	<li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle collapsed nav-link text-light bg-dark"><i class="mr-3 text-primary fa-fw"></i> 分类</a>
+                    <ul class="list-unstyled collapse" id="pageSubmenu" style="">
+                    <li>
+                    <a href="javascript:void(0);" class="categories-item" cate="All">
+                        All&nbsp;<span class="categories-badge"> {{site.posts | size}}</span>
+                    </a>
+                   </li>
+                {% for category in site.categories %}
+                <li>
+                    <a href="{{ root_url }}/{{ site.category_dir }}#{{ category | first }}" class="categories-item" cate="{{ category | first }}">
+                        {{ category | first }}&nbsp;<span class="categories-badge">{{ category | last | size }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+                    </ul>
+                </li>
+
+    		 {% for item in site.nav %}
+                  <li class="nav-item"><a class="nav-link bg-dark text-light" href="{{item.url}}"  title="{{item.description}}">{{item.title}}</a></li>
+                  {% endfor %}     
+  		</ul>
+
+  		<p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Charts</p>
+
+  			<ul class="nav flex-column bg-dark mb-0">
+    			<li class="nav-item ">
+      				<a href="#" class="nav-link text-light font-italic">
+                	<i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
+                		Area charts
+            		</a>
+    			</li>
+    			
+  			</ul>
+	</div>
+<!-- End vertical navbar -->
+
